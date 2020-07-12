@@ -39,7 +39,7 @@ public class UpdateServlet extends HttpServlet {
 
         // セッションスコープからメッセージのIDを取得して
         // 該当のIDのメッセージ1件のみをデータベースから取得
-        tasklist m = em.find(tasklist.class, (Integer)(request.getSession().getAttribute("task_id")));
+        tasklist m = em.find(tasklist.class, (Integer)(request.getSession().getAttribute("tasklist_id")));
 
         // フォームの内容を各プロパティに上書き
         String content = request.getParameter("content");
@@ -51,10 +51,11 @@ public class UpdateServlet extends HttpServlet {
         // データベースを更新
         em.getTransaction().begin();
         em.getTransaction().commit();
+        request.getSession().setAttribute("flush", "更新が完了しました。");       // ここを追記
         em.close();
 
         // セッションスコープ上の不要になったデータを削除
-        request.getSession().removeAttribute("task_id");
+        request.getSession().removeAttribute("tasklist_id");
 
         // indexページへリダイレクト
         response.sendRedirect(request.getContextPath() + "/index");
