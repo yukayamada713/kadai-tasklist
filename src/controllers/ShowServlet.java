@@ -18,8 +18,8 @@ import utils.DBUtil;
  */
 @WebServlet("/show")
 public class ShowServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,23 +28,23 @@ public class ShowServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        EntityManager em = DBUtil.createEntityManager();
-
-     // 該当のIDのメッセージ1件のみをデータベースから取得
-        tasklist m = em.find(tasklist.class, Integer.parseInt(request.getParameter("id")));
-
-        em.close();
-
-     // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
-        request.setAttribute("tasklist", m);
-
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasklist/show.jsp");
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	    EntityManager em = DBUtil.createEntityManager();
+	    
+	 // 該当のIDのメッセージ1件のみをデータベースから取得
+	    tasklist m = em.find(tasklist.class, Integer.parseInt(request.getParameter("id")));
+	    
+	    em.close();
+	    
+	 // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
+	    request.setAttribute("tasklist", m);
+	    
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasklist/show.jsp");
         rd.forward(request, response);
-    }
+	}
 
 }
