@@ -11,7 +11,7 @@
 </c:if>
 
 <label for="content">タスク入力</label><br />
-<input type="text" name="content" value="${task.content}" />
+<input type="text" name="content" value="${tasklist.content}" />
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
